@@ -1,12 +1,25 @@
-module.exports = function (app, express, db, jwt, secret, bcrypt) {
+module.exports = function (app, express, db, pool, jwt, secret, bcrypt) {
 
     var authRouter = express.Router();
 
     authRouter.post('/', async function (req, res) {
         try {
-            let rows = await db.collection('users').find({
-                username: req.body.username
-            }).toArray();
+            let rows = await pool.then(function (p) { return p.getConnection(); })
+                .then(function (connection) {
+                    con = connection;
+                    return con.query('SELECT * FROM users where username=?', req.body.username);
+                }).then(rows => {
+                    return rows;
+                }).catch(function(err) {
+                    console.error(err);
+                    res.json({"code" : 100, "status" : "Error with query"});
+                });
+                //  await db.collection('users').find({
+                //     username: req.body.username
+                // }).toArray();
+
+
+            console.log(rows);
 
             if (rows.length == 0) res.json({ status: 'NOT OK', description: 'Username doesnt exist' }); 
             else {

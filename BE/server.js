@@ -40,13 +40,13 @@ let initServer = (database) => {
 
     app.use(morgan('dev'));
 
-    let authRouter = require('./app/routes/authenticate')(app,express,database,jwt,config.secret, bcrypt);
+    let authRouter = require('./app/routes/authenticate')(app, express, database, pool, jwt, config.secret, bcrypt);
     app.use('/authenticate', authRouter);
 
     let apiRouter = require('./app/routes/api')(app, express, database, pool, jwt, config.secret);
     app.use('/api', apiRouter);
 
-    let apiNoTokenRouter = require('./app/routes/apiNoToken')(express,database);
+    let apiNoTokenRouter = require('./app/routes/apiNoToken')(express, database, pool);
     app.use('/apiNoToken', apiNoTokenRouter);
 
 

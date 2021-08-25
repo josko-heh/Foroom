@@ -29,7 +29,7 @@ module.exports=function(app, express, db, pool, jwt, secret){
     });
 
 
-    apiRouter.route('/users').get(async function(req,res){
+    apiRouter.route('/users').get(function(req,res){
         pool.then(function (p) {
                 return p.getConnection()
             }).then(function (connection) {

@@ -1,4 +1,4 @@
-module.exports=function(express, db){
+module.exports=function(express, db, pool){
 
     let apiRouter = express.Router();
 
@@ -12,14 +12,18 @@ module.exports=function(express, db){
                      email : req.body.email
                  };
 
-                 db.collection('users').insertOne(user, function(err, data){
-                     if (!err){
-                         res.json({ status: 'OK', newId:data.insertedId});
-                     }
-                     else
-                         res.json({ status: 'NOT OK' });
-                 });
-
+                 pool.then(function(p) {
+                    return p.getConnection()
+                }).then(function(connection) {
+                    con = connection;
+                    return con.query('INSERT INTO users SET ?', user);
+                }).then(row => {
+                    con.release();
+                    res.json({ status: 'OK', insertId:row.insertId });
+                }).catch(function(err) {
+                    console.error(err);
+                    res.json({"code" : 100, "status" : "Error with query"});
+                });
              });
     });
 

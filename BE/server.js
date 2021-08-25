@@ -10,12 +10,16 @@ let mongo=require("mongodb").MongoClient;
 
 let config = require('./config');
 
+const mysql = require('promise-mysql');
+const pool = mysql.createPool(config.poolsql);
+
+
 let init = async () => {
     try {
         let database = await mongo.connect(config.pool);
         initServer(database);
     } catch (e) {
-        console.error('Problem connecting to database');
+        console.error('Problem connecting to database', e);
     }
 };
 
@@ -39,7 +43,7 @@ let initServer = (database) => {
     let authRouter = require('./app/routes/authenticate')(app,express,database,jwt,config.secret, bcrypt);
     app.use('/authenticate', authRouter);
 
-    let apiRouter = require('./app/routes/api')(app,express,database, jwt, config.secret);
+    let apiRouter = require('./app/routes/api')(app, express, database, pool, jwt, config.secret);
     app.use('/api', apiRouter);
 
     let apiNoTokenRouter = require('./app/routes/apiNoToken')(express,database);

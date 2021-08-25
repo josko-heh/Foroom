@@ -1,4 +1,4 @@
-module.exports=function(app, express, db, jwt, secret){
+module.exports=function(app, express, db, pool, jwt, secret){
 
     let ObjectId = require('mongodb').ObjectId;
     let apiRouter = express.Router();
@@ -29,17 +29,19 @@ module.exports=function(app, express, db, jwt, secret){
     });
 
 
-    apiRouter.route('/users').get(function(req,res){
-
-        db.collection('users').find({}).toArray(function(err, rows){
-
-            if (!err){
+    apiRouter.route('/users').get(async function(req,res){
+        pool.then(function (p) {
+                return p.getConnection()
+            }).then(function (connection) {
+                con = connection;
+                return con.query('SELECT * FROM users')
+            }).then(rows => {
+                con.release();
                 res.json({ status: 'OK', users:rows });
-            }
-            else
-                res.json({ status: 'NOT OK' });
-        });
-
+            }).catch(function(err) {
+                console.error(err);
+                res.json({"code" : 100, "status" : "Error with query"});
+            });
     });
 
 
@@ -47,8 +49,7 @@ module.exports=function(app, express, db, jwt, secret){
         try {
             let rows = await db.collection('posts').find({}).toArray();
             res.json({ status: 'OK', posts : rows });
-        }
-        catch(e) {
+        } catch(e) {
             res.json({status: 'NOT OK'});
         }
     }).post(async function(req,res){

@@ -1,0 +1,18 @@
+<div id="posts">
+    <p style="font-size: large;">Posts({{posts.length}}):</p>
+    <div>
+        <div class="comment" *ngFor="let post of posts; let i = index;">
+            <p>by {{post.user}} at {{post.timestamp}}</p>
+            <div>{{post.comment}}</div>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-info" (click)="back()">Back</button>
+</div>
+<div id="data">
+    <p>User data</p>
+    <br>
+    <p>Username: {{user.username}}</p>
+    <p>E-mail: {{user.email}}</p>
+    <p>Name: {{user.name}}</p>
+</div>

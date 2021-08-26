@@ -10,12 +10,14 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     ProfileComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

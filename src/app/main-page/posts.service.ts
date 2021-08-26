@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from '../data.service';
-import { DbPost } from './dbpost.module';
-import { Post } from './post.module';
+import { DbPost } from './dbpost.model';
+import { Post } from './post.model';
 
 @Injectable({
   providedIn: 'root'

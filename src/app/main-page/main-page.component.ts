@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common'
-import { Post } from './post.module';
+import { Post } from './post.model';
 import { PostsService } from './posts.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../shared/user.model';
-import { DataService } from '../data.service';
 import { UsersService } from '../shared/users.service';
 
 @Component({

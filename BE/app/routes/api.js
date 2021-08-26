@@ -104,6 +104,21 @@ module.exports=function(app, express, db, pool, jwt, secret){
     });
 
 
+    apiRouter.route('/categories').get(function(req,res){
+        pool.then(function (p) {
+                return p.getConnection()
+            }).then(function (connection) {
+                con = connection;
+                return con.query('SELECT * FROM categories')
+            }).then(rows => {
+                con.release();
+                res.json({ status: 'OK', categories:rows });
+            }).catch(function(err) {
+                console.error(err);
+                res.json({"code" : 100, "status" : "Error with query"});
+            });
+    });
+
     /*apiRouter.get('/me', function (req, res){
 
         res.send(req.decoded);

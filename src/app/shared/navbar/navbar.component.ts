@@ -1,41 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {User} from "../user.model";
-import {Subscription} from "rxjs";
+import { Router } from "@angular/router";
+import { User } from "../user.model";
+import { Subscription } from "rxjs";
 import { AuthService } from '../services/auth.service';
+import { CategoriesService } from '../services/categories.service';
+import { Category } from 'src/app/category/category.model';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
 
-  user: User;
-  authenticated = false;
-  authChangeSubscription: Subscription;
+    user: User;
+    categories: Category[] = null;
+    authenticated = false;
+    authChangeSubscription: Subscription;
 
-  constructor(private router: Router, private auth: AuthService) { }
+    constructor(private router: Router, private auth: AuthService, private categoriesService: CategoriesService) { }
 
-  ngOnInit(): void {
-     this.authenticated=this.auth.isAuthenticated();
+    ngOnInit(): void {
+        this.authenticated = this.auth.isAuthenticated();
 
-     this.authChangeSubscription=this.auth.authChange
-         .subscribe(res => {
-           this.authenticated=this.auth.isAuthenticated();
-         });
-  }
+        this.authChangeSubscription = this.auth.authChange
+            .subscribe(res => {
+                this.authenticated = this.auth.isAuthenticated();
+            });
 
-  getActiveClass(a){
-    return this.router.url == a ? 'active' : '';
-  }
+        this.categoriesService.getCategories()
+            .subscribe(res => {
+                this.categories = res;
+            });
+    }
 
-  logout(){
-    this.auth.logout();
-  }
+    getActiveClass(a) {
+        return this.router.url == a ? 'active' : '';
+    }
 
-  ngOnDestroy(){
-    this.authChangeSubscription.unsubscribe();
-  }
+    // TODO: debug
+    cats(){
+        console.log(this.categories);
+    }
+
+    logout() {
+        this.auth.logout();
+    }
+
+    ngOnDestroy() {
+        this.authChangeSubscription.unsubscribe();
+    }
 
 }

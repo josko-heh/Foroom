@@ -61,12 +61,6 @@ export class MainPageComponent implements OnInit {
   }
   
 
-
-  logout(){
-    this.auth.logout();
-  }
-
-
   addPost(){
     this.newPost.idUser = this.user.id;
     this.newPost.timestamp = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');

@@ -19,8 +19,6 @@ module.exports = function (app, express, db, pool, jwt, secret, bcrypt) {
                 // }).toArray();
 
 
-            console.log(rows);
-
             if (rows.length == 0) res.json({ status: 'NOT OK', description: 'Username doesnt exist' }); 
             else {
                 let validPass = bcrypt.compareSync(req.body.password, rows[0].password);

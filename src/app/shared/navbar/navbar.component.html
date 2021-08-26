@@ -1,0 +1,11 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div collapse navbar-collapse>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" [ngClass]="getActiveClass('/')"><a class="nav-link" [routerLink]="['']">Home</a></li>
+            <li class="nav-item" [ngClass]="getActiveClass('/about')"><a class="nav-link" [routerLink]="['/profile']">Profile</a></li>
+            <!-- <li class="nav-item" [ngClass]="getActiveClass('/news')"><a class="nav-link" [routerLink]="['news']">NewsNeRadi</a></li> -->
+            <li class="nav-item" ><a class="nav-link" (click)="logout()" *ngIf="authenticated">Logout</a></li>
+            <li class="nav-item" ><a class="nav-link" (click)="logout()" *ngIf="!authenticated">Login</a></li>
+        </ul>
+    </div>
+</nav>

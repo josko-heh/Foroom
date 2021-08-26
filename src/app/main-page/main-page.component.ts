@@ -3,10 +3,10 @@ import { DatePipe } from '@angular/common'
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../shared/user.model';
-import { UsersService } from '../shared/users.service';
+import { UsersService } from '../shared/services/users.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-main-page',

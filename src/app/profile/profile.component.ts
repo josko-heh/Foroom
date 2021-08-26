@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { Post } from '../main-page/post.model';
 import { PostsService } from '../main-page/posts.service';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 import { User } from '../shared/user.model';
 
 @Component({

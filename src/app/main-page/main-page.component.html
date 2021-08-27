@@ -2,9 +2,7 @@
 <br>
 <hr>
 
-<p *ngIf="posts" style="font-size: large;">Posts({{posts.length}}):</p>
-<p *ngIf="!posts" style="font-size: large;">Posts(0)</p>
-<div>
+<!-- <div>
     <div class="comment" *ngFor="let post of posts; let i = index;">
 
         <div>
@@ -21,10 +19,10 @@
         <br>
 
     </div>
-</div>
+</div> -->
 <br>
 
-<button class="btn btn-info" *ngIf="!addingComm" (click)="addingComm = true">Add comment</button>
+<!-- <button class="btn btn-info" *ngIf="!addingComm" (click)="addingComm = true">Add comment</button>
 <button class="btn btn-success" *ngIf="addingComm" (click)="addingComm = false">Cancel</button>
 <div *ngIf="addingComm">
     User: <br>
@@ -33,4 +31,4 @@
     Comment: <br>
     <textarea name="novikom" [(ngModel)]="newPost.comment"></textarea>
     <button class="btn btn-info" (click)="addPost()" [disabled]="newPost.comment==0">Send</button>
-</div>
+</div> -->

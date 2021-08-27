@@ -1,4 +1,4 @@
-module.exports=function(express, db, pool){
+module.exports=function(express, pool){
 
     let apiRouter = express.Router();
 

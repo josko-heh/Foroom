@@ -1,4 +1,4 @@
-module.exports = function (app, express, db, pool, jwt, secret, bcrypt) {
+module.exports = function (app, express, pool, jwt, secret, bcrypt) {
 
     var authRouter = express.Router();
 

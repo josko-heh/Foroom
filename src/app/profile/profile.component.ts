@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import { Post } from '../main-page/post.model';
-import { PostsService } from '../main-page/posts.service';
 import { AuthService } from '../shared/services/auth.service';
 import { User } from '../shared/user.model';
 
@@ -13,22 +11,14 @@ import { User } from '../shared/user.model';
 export class ProfileComponent implements OnInit {
 
   user: User = null;
-  posts: Post[] = null;
 
-  constructor(private auth: AuthService, private postsService: PostsService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.auth.isAuthenticated()){
+    if ( !this.auth.isAuthenticated() )
       this.router.navigate(['/login']);
-    } else {
-
+    else
       this.user = this.auth.getUser();
-
-      this.postsService.getAllPosts()
-          .subscribe(res =>  
-            this.posts = res.filter(post => post.idUser == this.user.id)
-          ); 
-    }
   }
 
   

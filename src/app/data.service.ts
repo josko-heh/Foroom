@@ -11,7 +11,6 @@ export class DataService {
 
     apiNoTokenUsersUrl = environment.API_URL + '/apiNoToken/addUser';
     apiUsersUrl = environment.API_URL + '/api/users';
-    apiPostsUrl = environment.API_URL + '/api/posts';
     apiCategoriesUrl = environment.API_URL + '/api/categories';
     newsApiHeadlinesUrl = 'https://newsapi.org/v2/top-headlines';
 
@@ -27,23 +26,6 @@ export class DataService {
 
     addUser(user) {
         return this.http.post(this.apiNoTokenUsersUrl, user, this.paramsObj);
-    }
-
-
-    getAllPosts() {
-        return this.http.get(this.apiPostsUrl, this.paramsObj);
-    }
-
-    addPost(post) {
-        return this.http.post(this.apiPostsUrl, post, this.paramsObj);
-    }
-
-    deletePost(id) {
-        return this.http.delete(this.apiPostsUrl + `/${id}`, this.paramsObj)
-    }
-
-    editPost(post) {
-        return this.http.put(this.apiPostsUrl, post, this.paramsObj)
     }
 
 

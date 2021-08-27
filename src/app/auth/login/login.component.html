@@ -1,6 +1,6 @@
 <h2>Login</h2>
 
-<form [formGroup]="signinForm">
+<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
         <label for="username"><b>Username</b></label>
@@ -12,7 +12,11 @@
         <input type="password" id="password" formControlName="password">
     </div>
 
-    <button class="btn btn-success" [disabled]="!signinForm.valid" (click)="onSubmit()">Login!</button>
+    <button type="submit" class="btn btn-success" [disabled]="!signinForm.valid">Login</button>
 </form>
 
-<button class="btn btn-warning" (click)="toRegister()">Register!</button>
+<div *ngIf="isLoginSuccessful!=undefined && !isLoginSuccessful" class="alert alert-danger" role="alert">
+    Login failed.
+</div>
+
+<button class="btn btn-warning" (click)="toRegister()">Register</button>

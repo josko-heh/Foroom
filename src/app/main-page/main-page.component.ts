@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common'
-import { Post } from './post.model';
-import { PostsService } from './posts.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../shared/user.model';
@@ -16,18 +14,13 @@ import { AuthService } from '../shared/services/auth.service';
 export class MainPageComponent implements OnInit {
 
   user: User = null;
-  posts: Post[] = null;
   users: User[] = null;
-
-  newPost = { timestamp: "", idUser: "", comment: ""}; // without id; id is added by firebase
-  editingIndex: number = null;
-  addingComm = false;
 
   authenticated=false;
   authChangeSubscription : Subscription;
   
 
-  constructor(private auth: AuthService, private postsService: PostsService, private usersService: UsersService, private router: Router, private datepipe: DatePipe) { }
+  constructor(private auth: AuthService, private usersService: UsersService, private router: Router, private datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.authenticated = this.auth.isAuthenticated();
@@ -47,11 +40,6 @@ export class MainPageComponent implements OnInit {
 
       this.user = this.auth.getUser();
 
-      this.postsService.getAllPosts()
-          .subscribe(res => {
-              this.posts = res;
-          }); 
-
       this.usersService.getAllUsers()
         .subscribe(res => {
           this.users = res;
@@ -61,7 +49,7 @@ export class MainPageComponent implements OnInit {
   }
   
 
-  addPost(){
+ /* addPost(){
     this.newPost.idUser = this.user.id;
     this.newPost.timestamp = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.postsService.addPost({...this.newPost});
@@ -83,7 +71,7 @@ export class MainPageComponent implements OnInit {
 
     this.editingIndex = null;
   }
-
+*/
   getUsername(id){
     return this.users.find(user => user.id == id).username;
   }

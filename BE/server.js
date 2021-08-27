@@ -6,24 +6,21 @@ let path = require('path');
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt-nodejs');
 let cors = require('cors');
-let mongo=require("mongodb").MongoClient;
+const mysql = require('promise-mysql');
 
 let config = require('./config');
-
-const mysql = require('promise-mysql');
-const pool = mysql.createPool(config.poolsql);
 
 
 let init = async () => {
     try {
-        let database = await mongo.connect(config.pool);
-        initServer(database);
+        let pool = mysql.createPool(config.poolsql);
+        initServer(pool);
     } catch (e) {
         console.error('Problem connecting to database', e);
     }
 };
 
-let initServer = (database) => {
+let initServer = (pool) => {
     
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -40,13 +37,13 @@ let initServer = (database) => {
 
     app.use(morgan('dev'));
 
-    let authRouter = require('./app/routes/authenticate')(app, express, database, pool, jwt, config.secret, bcrypt);
+    let authRouter = require('./app/routes/authenticate')(app, express, pool, jwt, config.secret, bcrypt);
     app.use('/authenticate', authRouter);
 
-    let apiRouter = require('./app/routes/api')(app, express, database, pool, jwt, config.secret);
+    let apiRouter = require('./app/routes/api')(app, express, pool, jwt, config.secret);
     app.use('/api', apiRouter);
 
-    let apiNoTokenRouter = require('./app/routes/apiNoToken')(express, database, pool);
+    let apiNoTokenRouter = require('./app/routes/apiNoToken')(express, pool);
     app.use('/apiNoToken', apiNoTokenRouter);
 
 

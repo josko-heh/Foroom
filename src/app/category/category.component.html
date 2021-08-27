@@ -1,1 +1,13 @@
-<p>category works! {{category.id}}</p>
+<h2>{{category.name}}</h2>
+
+<router-outlet></router-outlet>
+
+<main *ngIf="category">
+    <div *ngFor="let thread of category.threads">
+        <a [routerLink]="['threads', thread.id]">
+            <p>{{thread.title}}</p>
+            <p>{{thread.datetime}}</p>
+            <br>
+        </a>
+    </div>
+</main>

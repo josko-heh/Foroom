@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../shared/services/categories.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Category } from './category.model';
 
 @Component({
@@ -12,27 +12,19 @@ export class CategoryComponent implements OnInit {
 
     category: Category = null;
 
-    constructor(private categoriesService: CategoriesService, private route: ActivatedRoute) { }
+    constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit(): void {
-        this.categoriesService.getCategoryDetail(this.route.snapshot.params['id']).subscribe(
-            (res: { status: string, cat: Category}) => {
-                if (res.status == "OK") {
-                    this.category = res.cat;
-                } else { 
-                    // TODO: testiraj dal linija ispod uhvati error 
-                    throw new Error(status);
-                }
-            }, (err: { error: { message: string } }) => console.log(err.error.message)
-        );
+        this.route.params.subscribe((params: Params) => {
 
-        //TODO: trebam li ovo? kad se prebacuje sa kategorije na kategorije
-        // this.route.params.subscribe(
-        //     (params:Params) => {
-        //       this.name = params.id;
-        //       this.country = this.countries.find(c => c.name == this.name);
-        // }
-        // );
+            this.categoriesService.getCategoryDetail(params.id).subscribe(
+                (res: { status: string, category: Category }) => {
+                    if (res.status == "OK") this.category = res.category;
+                    else if (res.status == "NOT FOUND") this.router.navigate(['']);
+                    else console.log(res.status);
+                }
+            );
+        });
     }
 
 }

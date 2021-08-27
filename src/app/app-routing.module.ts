@@ -6,18 +6,23 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterModule } from './register/register.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryComponent } from './category/category.component';
+import { ThreadComponent } from './category/thread/thread.component';
 
 
 const routes: Routes = [
-  {path:'', component: MainPageComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'login', loadChildren: () => AuthModule},
-  {path:'register', loadChildren: () => RegisterModule},
-  {path:'categories/:id', component: CategoryComponent}
+    { path: '', component: MainPageComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'login', loadChildren: () => AuthModule },
+    { path: 'register', loadChildren: () => RegisterModule },
+    {
+        path: 'categories/:id', component: CategoryComponent, children: [
+            { path: 'threads/:id', component: ThreadComponent }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

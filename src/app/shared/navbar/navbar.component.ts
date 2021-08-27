@@ -38,11 +38,6 @@ export class NavbarComponent implements OnInit {
         return this.router.url == a ? 'active' : '';
     }
 
-    // TODO: debug
-    cats(){
-        console.log(this.categories);
-    }
-
     logout() {
         this.auth.logout();
     }

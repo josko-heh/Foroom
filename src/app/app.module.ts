@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { CategoryComponent } from './category/category.component';
+import { ThreadComponent } from './category/thread/thread.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CategoryComponent } from './category/category.component';
     MainPageComponent,
     ProfileComponent,
     CategoryComponent,
+    ThreadComponent
   ],
   imports: [
     BrowserModule,

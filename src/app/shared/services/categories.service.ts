@@ -55,4 +55,12 @@ export class CategoriesService {
     getCategoryDetail(id: number) {
         return this.dataService.getCategoryDetail(id);
     }
+
+    getHeadlineNewsArticle(keyword : string) {
+        return this.dataService.getHeadlineNewsArticle(keyword);
+    }
+
+    getThreadDetail(id: number) {
+        return this.dataService.getThreadDetail(id);
+    }
 }

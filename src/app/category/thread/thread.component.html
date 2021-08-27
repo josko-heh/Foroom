@@ -1,1 +1,9 @@
-<p>thread works!</p>
+<h3>{{thread.title}}</h3>
+<span>by {{thread.user.username}}</span>
+<hr>
+<div>
+    <div *ngFor="let comm of thread.comments">
+        <span>{{comm.user.username}}, {{comm.datetime}}</span>
+        <p>{{comm.content}}</p>
+    </div>
+</div>

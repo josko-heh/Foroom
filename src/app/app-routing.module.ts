@@ -14,11 +14,11 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'login', loadChildren: () => AuthModule },
     { path: 'register', loadChildren: () => RegisterModule },
-    {
-        path: 'categories/:id', component: CategoryComponent, children: [
+    { path: 'categories/:id', component: CategoryComponent, children: [
             { path: 'threads/:id', component: ThreadComponent }
         ]
-    }
+    },
+    { path: '**', component: MainPageComponent}
 ];
 
 @NgModule({

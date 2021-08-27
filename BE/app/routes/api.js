@@ -138,7 +138,7 @@ module.exports = function (app, express, db, pool, jwt, secret) {
                 }
 
                 rows.forEach(row => {
-                    if(row.th_id != null) 
+                    if (row.th_id != null)
                         returnCategory.threads.push({
                             "id": row.th_id,
                             "title": row.title,
@@ -147,9 +147,61 @@ module.exports = function (app, express, db, pool, jwt, secret) {
                 });
 
                 res.json({ status: 'OK', category: returnCategory });
-            } else 
+            } else
                 res.json({ status: 'NOT FOUND', category: null });
-            
+
+        }).catch(function (err) {
+            console.error(err);
+            res.json({ "code": 100, "status": "Error with query" });
+        });
+    });
+
+
+    apiRouter.route('/categories/threads/:id').get(function (req, res) {
+        pool.then(function (p) {
+            return p.getConnection()
+        }).then(function (connection) {
+            con = connection;
+            return con.query(
+                `SELECT threads.id th_id, title, threads.datetime th_dt, th_users.id th_userId, th_users.username th_username, 
+                comments.id comm_id, content, comments.datetime comm_dt, comm_users.id comm_userId, comm_users.username comm_username
+            FROM threads
+            LEFT JOIN users th_users ON th_users.id = threads.user_id
+            LEFT JOIN comments ON comments.thread_id = threads.id
+            LEFT JOIN users comm_users ON comm_users.id = comments.user_id
+            WHERE threads.id = ?;`, req.params.id);
+        }).then(rows => {
+            con.release();
+
+            if (rows.length > 0) {
+                let returnThread = {
+                    "id": rows[0].th_id,
+                    "title": rows[0].title,
+                    "datetime": rows[0].th_dt,
+                    "user": {
+                        "id": rows[0].th_userId,
+                        "username": rows[0].th_username
+                    },
+                    "comments": []
+                }
+
+                rows.forEach(row => {
+                    if (row.comm_id != null)
+                        returnThread.comments.push({
+                            "id": row.comm_id,
+                            "content": row.content,
+                            "datetime": row.comm_dt,
+                            "user": {
+                                "id": row.comm_userId,
+                                "username": row.comm_username
+                            }
+                        });
+                });
+
+                res.json({ status: 'OK', thread: returnThread });
+            } else
+                res.json({ status: 'NOT FOUND', thread: null });
+
         }).catch(function (err) {
             console.error(err);
             res.json({ "code": 100, "status": "Error with query" });

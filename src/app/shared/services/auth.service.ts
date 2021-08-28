@@ -60,7 +60,7 @@ export class AuthService {
           });*/
     }
 
-    getUser() {
+    getUser(): User {
         return this.user;
         /*stara verzija
         if (!this.user) this.user = JSON.parse(localStorage.getItem('user'));

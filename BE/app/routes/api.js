@@ -36,7 +36,11 @@ module.exports = function (app, express, pool, jwt, secret) {
             return con.query('SELECT * FROM users')
         }).then(rows => {
             con.release();
-            res.json({ status: 'OK', users: rows });
+
+            if (rows.length > 0)
+                res.json({ status: 'OK', users: rows });
+            else
+                res.json({ status: 'NO CONTENT', users: null });
         }).catch(function (err) {
             console.error(err);
             res.json({ "code": 100, "status": "Error with query" });
@@ -168,6 +172,21 @@ module.exports = function (app, express, pool, jwt, secret) {
             } else
                 res.json({ status: 'NO CONTENT', thread: null });
 
+        }).catch(function (err) {
+            console.error(err);
+            res.json({ "code": 100, "status": "Error with query" });
+        });
+    });
+
+    apiRouter.route('/categories/comments/:id').delete(function (req, res) {
+        pool.then(function (p) {
+            return p.getConnection()
+        }).then(function (connection) {
+            con = connection;
+            return con.query(`DELETE FROM comments WHERE id = ?;`, req.params.id);
+        }).then(() => {
+            con.release();
+            res.json({ status: 'OK' });
         }).catch(function (err) {
             console.error(err);
             res.json({ "code": 100, "status": "Error with query" });

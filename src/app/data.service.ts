@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from './shared/services/auth.service';
 import { environment } from "../environments/environment";
 import { secrets } from "../../configSecrets"
+import { User } from './shared/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class DataService {
         return this.http.get(this.apiUsersUrl, this.paramsObj);
     }
 
-    addUser(user) {
+    addUser(user: User) {
         return this.http.post(this.apiNoTokenUsersUrl, user, this.paramsObj);
     }
 
@@ -50,4 +51,8 @@ export class DataService {
         return this.http.get(this.apiCategoriesUrl + "/threads/rand", this.paramsObj)
     }
 
+
+    deleteComment(id) {
+        return this.http.delete(this.apiCategoriesUrl + "/comments/" + id, this.paramsObj)
+    }
 }

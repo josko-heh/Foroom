@@ -26,10 +26,7 @@ export class MainPageComponent implements OnInit {
         else {
             this.user = this.auth.getUser();
 
-            this.usersService.getAllUsers()
-                .subscribe(res => {
-                    this.users = res;
-                })
+            this.usersService.getAllUsers().subscribe(res => this.users = res);
 
             this.categoriesService.getRandomThreadId().subscribe(
                 (res: {
@@ -40,7 +37,7 @@ export class MainPageComponent implements OnInit {
                     if (res.status == "OK")
                         this.randThreadUrl = this.buildThreadUrl(res.categoryId, res.threadId);
                     else
-                        console.log("getRandomThreadId res:", res.status);
+                        console.log("getRandomThreadId failed; res:", res.status);
                 });
         }
     }

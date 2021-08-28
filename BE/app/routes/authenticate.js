@@ -36,7 +36,7 @@ module.exports = function (app, express, pool, jwt, secret, bcrypt) {
                         status: 'OK',
                         token: token,
                         user: { 
-                            id :  rows[0]._id,
+                            id:  rows[0].id,
                             username: rows[0].username, 
                             name: rows[0].name,
                             password: rows[0].password,

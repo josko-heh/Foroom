@@ -61,8 +61,7 @@ export class AuthService {
     }
 
     getUser() {
-        if (this.user)
-            return { ...this.user }; else return null;
+        return this.user;
         /*stara verzija
         if (!this.user) this.user = JSON.parse(localStorage.getItem('user'));
         return {...this.user};

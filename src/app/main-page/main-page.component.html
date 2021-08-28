@@ -1,6 +1,6 @@
-<span>Welcome {{user.username}}, {{user.email}} !</span>
+<span>Welcome Mr/Ms {{user.name | initialPipe}}. - aka {{user.username}}</span>
 <br>
-<span>Go to <a href="{{randThreadUrl}}">random thread</a></span>
+<span>Go to <a [routerLink]="[randThreadUrl]">random thread</a></span>
 
 
 <!-- <div>

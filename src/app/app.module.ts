@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { CategoryComponent } from './category/category.component';
 import { ThreadComponent } from './category/thread/thread.component';
+import { InitialPipe } from './main-page/initial.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ThreadComponent } from './category/thread/thread.component';
     MainPageComponent,
     ProfileComponent,
     CategoryComponent,
-    ThreadComponent
+    ThreadComponent,
+    InitialPipe
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@
     <div *ngFor="let thread of category.threads">
         <a [routerLink]="['threads', thread.id]">
             <p>{{thread.title}}</p>
-            <p>{{thread.datetime}}</p>
+            <p>{{thread.datetime | date: 'dd.MM.yyyy, hh:mm'}}</p>
             <br>
         </a>
     </div>

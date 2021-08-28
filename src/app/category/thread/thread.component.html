@@ -3,7 +3,11 @@
 <hr>
 <div>
     <div *ngFor="let comm of thread.comments">
-        <span>{{comm.user.username}}, {{comm.datetime}}</span>
+        <span>{{comm.user.username}}, {{comm.datetime | date: 'd.M.yy, h:mm a'}}</span>
         <p>{{comm.content}}</p>
+        
+        <button class="btn btn-danger" *ngIf="currentUser.id == comm.user.id" (click)="deleteComment(comm.id)">Delete</button>
+        <button class="btn btn-warning" *ngIf="editingId != comm.id && currentUser.id == comm.user.id" (click)="editingId = comm.id">Edit</button>
+        <button class="btn btn-warning" *ngIf="editingId == comm.id && currentUser.id == comm.user.id" (click)="editComment(comm.id)">Done editing</button>
     </div>
 </div>

@@ -88,7 +88,7 @@ module.exports = function (app, express, pool, jwt, secret) {
 
                 res.json({ status: 'OK', category: returnCategory });
             } else
-                res.json({ status: 'NOT FOUND', category: null });
+                res.json({ status: 'NO CONTENT', category: null });
 
         }).catch(function (err) {
             console.error(err);
@@ -96,6 +96,32 @@ module.exports = function (app, express, pool, jwt, secret) {
         });
     });
 
+    apiRouter.route('/categories/threads/rand').get(function (req, res) {
+        pool.then(function (p) {
+            return p.getConnection()
+        }).then(function (connection) {
+            con = connection;
+            return con.query(`SELECT categories.id cat_id, threads.id th_id FROM threads
+                JOIN categories ON threads.category_id = categories.id
+                ORDER BY RAND()
+                LIMIT 1;`);
+        }).then(rows => {
+            con.release();
+
+            if (rows.length > 0) {
+                res.json({ 
+                    status: 'OK', 
+                    categoryId: rows[0].cat_id,
+                    threadId: rows[0].th_id
+                });
+            } else
+                res.json({ status: 'NO CONTENT', categoryId: null, threadId: null});
+
+        }).catch(function (err) {
+            console.error(err);
+            res.json({ "code": 100, "status": "Error with query" });
+        });
+    });
 
     apiRouter.route('/categories/threads/:id').get(function (req, res) {
         pool.then(function (p) {
@@ -140,7 +166,7 @@ module.exports = function (app, express, pool, jwt, secret) {
 
                 res.json({ status: 'OK', thread: returnThread });
             } else
-                res.json({ status: 'NOT FOUND', thread: null });
+                res.json({ status: 'NO CONTENT', thread: null });
 
         }).catch(function (err) {
             console.error(err);
@@ -148,6 +174,7 @@ module.exports = function (app, express, pool, jwt, secret) {
         });
     });
 
+    
     /*apiRouter.get('/me', function (req, res){
 
         res.send(req.decoded);

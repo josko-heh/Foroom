@@ -63,4 +63,9 @@ export class CategoriesService {
     getThreadDetail(id: number) {
         return this.dataService.getThreadDetail(id);
     }
+
+    getRandomThreadId() {
+        return this.dataService.getRandomThreadId();
+    }
+
 }

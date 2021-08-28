@@ -84,6 +84,8 @@ export class AuthService {
     }
 
     logout() {
+        console.log("logout");
+        
         this.user = null;
         this.token = null;
         localStorage.removeItem('token');

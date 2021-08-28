@@ -45,4 +45,9 @@ export class DataService {
     getThreadDetail(id: number) {
         return this.http.get(this.apiCategoriesUrl + "/threads/" + id, this.paramsObj)
     }
+
+    getRandomThreadId() {
+        return this.http.get(this.apiCategoriesUrl + "/threads/rand", this.paramsObj)
+    }
+
 }

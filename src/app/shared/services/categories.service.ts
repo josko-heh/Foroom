@@ -53,7 +53,7 @@ export class CategoriesService {
         return this.categoriesSubject;
     }
 
-    getCategoryDetail(id: number) {
+    getCategoryDetail(id) {
         return this.dataService.getCategoryDetail(id);
     }
 
@@ -63,16 +63,20 @@ export class CategoriesService {
     }
 
 
-    getThreadDetail(id: number) {
+    getThreadDetail(id) {
         return this.dataService.getThreadDetail(id);
     }
 
     getRandomThreadId() {
         return this.dataService.getRandomThreadId();
     }
-
+    
 
     deleteComment(id) {
         return this.dataService.deleteComment(id);
+    }
+    
+    editComment(id, newContent: string) {
+        return this.dataService.editComment(id, newContent);
     }
 }

@@ -68,7 +68,8 @@ module.exports = function (app, express, pool, jwt, secret) {
             return p.getConnection()
         }).then(function (connection) {
             con = connection;
-            return con.query(`SELECT categories.id cat_id, name, threads.id th_id, title, datetime FROM categories
+            return con.query(`
+                SELECT categories.id cat_id, name, threads.id th_id, title, datetime FROM categories
                 LEFT JOIN threads ON categories.id = threads.category_id
                 WHERE categories.id = ?;`, req.params.id);
         }).then(rows => {
@@ -105,7 +106,8 @@ module.exports = function (app, express, pool, jwt, secret) {
             return p.getConnection()
         }).then(function (connection) {
             con = connection;
-            return con.query(`SELECT categories.id cat_id, threads.id th_id FROM threads
+            return con.query(`
+                SELECT categories.id cat_id, threads.id th_id FROM threads
                 JOIN categories ON threads.category_id = categories.id
                 ORDER BY RAND()
                 LIMIT 1;`);
@@ -184,6 +186,24 @@ module.exports = function (app, express, pool, jwt, secret) {
         }).then(function (connection) {
             con = connection;
             return con.query(`DELETE FROM comments WHERE id = ?;`, req.params.id);
+        }).then(() => {
+            con.release();
+            res.json({ status: 'OK' });
+        }).catch(function (err) {
+            console.error(err);
+            res.json({ "code": 100, "status": "Error with query" });
+        });
+    });
+
+    apiRouter.route('/categories/comments/:id').patch(function (req, res) {
+        pool.then(function (p) {
+            return p.getConnection()
+        }).then(function (connection) {
+            con = connection;
+            return con.query(`
+                UPDATE comments 
+                SET content = ?
+                WHERE id = ?;`, [ req.body.content, req.params.id ]);
         }).then(() => {
             con.release();
             res.json({ status: 'OK' });

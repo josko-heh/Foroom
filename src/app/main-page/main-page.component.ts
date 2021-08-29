@@ -18,7 +18,8 @@ export class MainPageComponent implements OnInit {
     randThreadUrl: string;
 
 
-    constructor(private auth: AuthService, private usersService: UsersService, private categoriesService: CategoriesService, private router: Router) { }
+    constructor( private auth: AuthService, private usersService: UsersService, 
+        private categoriesService: CategoriesService, private router: Router ) { }
 
     ngOnInit(): void {
         if ( !this.auth.isAuthenticated() )

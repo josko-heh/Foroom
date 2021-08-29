@@ -34,7 +34,7 @@ export class DataService {
         return this.http.get(this.apiCategoriesUrl, this.paramsObj)
     }
 
-    getCategoryDetail(id: number) {
+    getCategoryDetail(id) {
         return this.http.get(this.apiCategoriesUrl + "/" + id, this.paramsObj)
     }
 
@@ -43,7 +43,7 @@ export class DataService {
     }
     
 
-    getThreadDetail(id: number) {
+    getThreadDetail(id) {
         return this.http.get(this.apiCategoriesUrl + "/threads/" + id, this.paramsObj)
     }
 
@@ -54,5 +54,12 @@ export class DataService {
 
     deleteComment(id) {
         return this.http.delete(this.apiCategoriesUrl + "/comments/" + id, this.paramsObj)
+    }
+
+    editComment(id, newContent: string) {
+        return this.http.patch(
+            this.apiCategoriesUrl + "/comments/" + id, 
+            { content: newContent },
+            this.paramsObj );
     }
 }

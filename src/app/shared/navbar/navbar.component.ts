@@ -15,17 +15,15 @@ export class NavbarComponent implements OnInit {
 
     user: User;
     categories: Category[] = null;
-    authenticated = false;
     authChangeSubscription: Subscription;
 
     constructor(private router: Router, private auth: AuthService, private categoriesService: CategoriesService) { }
 
     ngOnInit(): void {
-        this.authenticated = this.auth.isAuthenticated();
 
         this.authChangeSubscription = this.auth.authChange
             .subscribe(res => {
-                this.authenticated = this.auth.isAuthenticated();
+                this.user = res;
             });
 
         this.categoriesService.getCategories()

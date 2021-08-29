@@ -20,7 +20,6 @@ import { InitialPipe } from './main-page/initial.pipe';
     MainPageComponent,
     ProfileComponent,
     CategoryComponent,
-    ThreadComponent,
     InitialPipe
   ],
   imports: [

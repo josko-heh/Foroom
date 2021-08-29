@@ -7,12 +7,14 @@ import { RegisterModule } from './register/register.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryComponent } from './category/category.component';
 import { ThreadComponent } from './category/thread/thread.component';
+import { AdminModule } from './admin/admin.module';
 
 
 const routes: Routes = [
     { path: '', component: MainPageComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'login', loadChildren: () => AuthModule },
+    { path: 'admin', loadChildren: () => AdminModule },
     { path: 'register', loadChildren: () => RegisterModule },
     { path: 'categories/:id', component: CategoryComponent, children: [
             { path: 'threads/:id', component: ThreadComponent }

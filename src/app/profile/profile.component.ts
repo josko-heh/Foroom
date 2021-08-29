@@ -15,8 +15,6 @@ export class ProfileComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.auth.isAuthenticated());
-
     if ( !this.auth.isAuthenticated() )
       this.router.navigate(['/login']);
     else

@@ -40,7 +40,8 @@ module.exports = function (app, express, pool, jwt, secret, bcrypt) {
                             username: rows[0].username, 
                             name: rows[0].name,
                             password: rows[0].password,
-                            email: rows[0].email
+                            email: rows[0].email,
+                            authLevel: rows[0].auth_level
                         }
                     });
                 } else {

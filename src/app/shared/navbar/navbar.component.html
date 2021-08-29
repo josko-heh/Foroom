@@ -8,16 +8,23 @@
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li *ngFor="let cat of categories" class="nav-item" [ngClass]="getActiveClass('/')">
-                        <a class="nav-link" [routerLink]="['/categories', cat.id]">{{cat.name}}</a></li>
+                        <a class="nav-link" [routerLink]="['/categories', cat.id]">{{cat.name}}</a>
+                    </li>
                 </ul>
             </li>
 
             <li class="nav-item" [ngClass]="getActiveClass('/profile')">
-                <a class="nav-link" [routerLink]="['/profile']">Profile</a></li>
-            <li class="nav-item">
-                <a class="nav-link" (click)="logout()" *ngIf="authenticated">Logout</a></li>
-            <li class="nav-item" [ngClass]="getActiveClass('/login')">
-                <a class="nav-link" (click)="logout()" *ngIf="!authenticated">Login</a></li>
+                <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+            </li>
+            <li *ngIf="user" class="nav-item">
+                <a class="nav-link" (click)="logout()">Logout</a>
+            </li>
+            <li *ngIf="!user" class="nav-item" [ngClass]="getActiveClass('/login')">
+                <a class="nav-link" [routerLink]="['/admin']">Login</a>
+            </li>
+            <li *ngIf="user && user.authLevel=='admin'" class="nav-item" [ngClass]="getActiveClass('/admin')">
+                <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+            </li>
         </ul>
     </div>
 </nav>

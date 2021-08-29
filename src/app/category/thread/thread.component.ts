@@ -28,7 +28,7 @@ export class ThreadComponent implements OnInit {
 
     ngOnInit(): void {
         this.currentUser = this.auth.getUser();
-
+        
         this.route.params.subscribe((params: Params) => {
             this.editingId = null;
             this.showFailed = false;

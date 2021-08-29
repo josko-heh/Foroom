@@ -1,0 +1,13 @@
+<h3>Users list</h3>
+
+<main>
+    <ul>
+        <li *ngFor="let user of users">
+            <ng-container *ngIf="user.authLevel != 'admin'">
+                Username: <span>{{user.username}}</span> <br>
+                Name: <span>{{user.name}}</span> <br>
+                Email: <span>{{user.email}}</span>
+            </ng-container>
+        </li>
+    </ul>
+</main>

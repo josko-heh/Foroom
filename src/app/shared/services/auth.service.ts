@@ -14,12 +14,15 @@ export class AuthService {
     private user: User;
     private token: string;
     //errorEmitter : Subject<string> = new Subject<string>();
-    authChange: Subject<boolean> = new Subject<boolean>();
+    authChange: Subject<User> = new Subject<User>();
     authUrl: string = environment.API_URL + '/authenticate';
 
 
     constructor(private router: Router, private http: HttpClient) { }
 
+    /**
+     * @returns Promise that resolves true if login is succesful or false otherwise
+     */
     login(credentials: { username: string, password: string }) {
 
         return new Promise<boolean>( resolve => {
@@ -30,7 +33,7 @@ export class AuthService {
                         this.user = res.user;
                         this.token = res.token;
                         localStorage.setItem('token', this.token);
-                        this.authChange.next(true);
+                        this.authChange.next(res.user);
                         resolve(true);
                     } else {
                         //this.errorEmitter.next('Wrong credentials');
@@ -86,8 +89,7 @@ export class AuthService {
         this.user = null;
         this.token = null;
         localStorage.removeItem('token');
-        // stara localStorage.removeItem('user');
-        this.authChange.next(false);
+        this.authChange.next(null);
         this.router.navigate(['/login']);
     }
 

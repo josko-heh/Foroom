@@ -3,9 +3,21 @@
     <span>by {{thread.user.username}}</span>
 </div>
 <hr>
+
 <div *ngIf="showFailed" class="alert alert-danger" role="alert">
     Action failed.
 </div>
+
+<div>
+    <button class="btn btn-info" *ngIf="!addingComm" (click)="addingComm = true">Add comment</button>
+    <button class="btn btn-success" *ngIf="addingComm" (click)="addingComm = false">Cancel</button>
+    <div *ngIf="addingComm">
+        Comment: <br>
+        <textarea maxlength="1200" [(ngModel)]="newContent"></textarea>
+        <button class="btn btn-info" (click)="addComment(newContent)" [disabled]="!newContent || newContent.length==0">Send</button>
+    </div>
+</div>
+
 <div>
     <div *ngFor="let comm of thread.comments">
         <span>{{comm.user.username}}, {{comm.datetime | date: 'd.M.yy, h:mm a'}}</span>

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from './shared/services/auth.service';
 import { environment } from "../environments/environment";
-import { secrets } from "../../configSecrets"
+import { properties } from "../properties"
 import { User } from './shared/user.model';
+import { Comment } from 'src/app/category/thread/comment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -39,7 +40,7 @@ export class DataService {
     }
 
     getHeadlineNewsArticle(keyword: string) {
-        return this.http.get(this.newsApiHeadlinesUrl + '?pageSize=1&q=' + keyword + '&apiKey=' + secrets.apikey)
+        return this.http.get(this.newsApiHeadlinesUrl + '?pageSize=1&q=' + keyword + '&apiKey=' + properties.apikey)
     }
     
 
@@ -60,6 +61,13 @@ export class DataService {
         return this.http.patch(
             this.apiCategoriesUrl + "/comments/" + id, 
             { content: newContent },
+            this.paramsObj );
+    }
+    
+    addComment(threadId, newComment: Comment) {
+        return this.http.post(
+            this.apiCategoriesUrl + "/threads/" + threadId + "/comments", 
+            newComment, 
             this.paramsObj );
     }
 }

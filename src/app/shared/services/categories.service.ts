@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/category/category.model';
+import { Comment } from 'src/app/category/thread/comment.model';
 import { DataService } from 'src/app/data.service';
 
 @Injectable({
@@ -78,5 +79,9 @@ export class CategoriesService {
     
     editComment(id, newContent: string) {
         return this.dataService.editComment(id, newContent);
+    }
+    
+    addComment(threadId, newComment: Comment) {
+        return this.dataService.addComment(threadId, newComment);
     }
 }

@@ -180,6 +180,31 @@ module.exports = function (app, express, pool, jwt, secret) {
         });
     });
 
+    apiRouter.route('/categories/threads/:id/comments').post(function (req, res) {
+
+        let comm = {
+            content: req.body.content,
+            datetime: req.body.datetime,
+            user_id: req.body.user.id,
+            thread_id: req.params.id
+        }
+
+        console.log(comm);
+
+        pool.then(function(p) {
+            return p.getConnection()
+        }).then(function(connection) {
+            con = connection;
+            return con.query('INSERT INTO comments SET ?', comm);
+        }).then(row => {
+            con.release();
+            res.json({ status: 'OK', insertId:row.insertId });
+        }).catch(function(err) {
+            console.error(err);
+            res.json({"code" : 100, "status" : "Error with query"});
+        });
+    });
+
     apiRouter.route('/categories/comments/:id').delete(function (req, res) {
         pool.then(function (p) {
             return p.getConnection()

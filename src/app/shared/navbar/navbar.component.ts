@@ -32,8 +32,10 @@ export class NavbarComponent implements OnInit {
             });
     }
 
-    getActiveClass(a) {
-        return this.router.url == a ? 'active' : '';
+    getActiveClass(urlRegexp: string) {
+        let regexp = new RegExp(urlRegexp);
+
+        return regexp.test(this.router.url) ? 'active' : '';
     }
 
     logout() {

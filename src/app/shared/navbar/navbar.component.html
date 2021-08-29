@@ -3,11 +3,11 @@
         <ul class="navbar-nav mr-auto">
             <li class="navbar-header"><a class="navbar-brand" [routerLink]="['']">Foroom</a></li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown"  [ngClass]="getActiveClass('/categories.*')">
                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Categories
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li *ngFor="let cat of categories" class="nav-item" [ngClass]="getActiveClass('/')">
+                    <li *ngFor="let cat of categories" class="nav-item">
                         <a class="nav-link" [routerLink]="['/categories', cat.id]">{{cat.name}}</a>
                     </li>
                 </ul>

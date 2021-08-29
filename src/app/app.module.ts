@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { CategoryComponent } from './category/category.component';
-import { ThreadComponent } from './category/thread/thread.component';
 import { InitialPipe } from './main-page/initial.pipe';
+import { AuthenticationGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { InitialPipe } from './main-page/initial.pipe';
     RouterModule,
     SharedModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

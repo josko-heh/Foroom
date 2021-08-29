@@ -23,4 +23,8 @@
     <button type="submit" class="btn btn-success" [disabled]="!regForm.valid">Register!</button> 
 </form>
 
+<div *ngIf="isRegSuccessful!=undefined && !isRegSuccessful" class="alert alert-danger" role="alert">
+    Registration failed.
+</div>
+
 <p><a [routerLink]="['../login']">Back to login form</a></p>

@@ -13,7 +13,8 @@ export class RegistrationComponent implements OnInit {
   
   user: User = null;
 
-  regForm : FormGroup;
+  regForm: FormGroup;
+  isRegSuccessful: boolean;
 
   constructor(private usersService: UsersService, private fb : FormBuilder, private router:Router) { }
 
@@ -39,8 +40,10 @@ export class RegistrationComponent implements OnInit {
     delete this.regForm.value.passwordRep;
     
     this.usersService.addUser(this.regForm.value)
-    
-    this.router.navigate(['../login']);
+        .then(successful => { 
+            this.isRegSuccessful = successful;
+            if (this.isRegSuccessful) this.router.navigate(['../login']);
+        });
   }
 
 

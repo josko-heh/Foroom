@@ -64,15 +64,20 @@ export class UsersService {
             }
         })
         */
-        return this.dataService.addUser(user)
-            .subscribe((res: { status: string, newId: string }) => {
-                if (res.status == "OK") {
-                    user.id = res.newId;
-                    this.users.push(user);
-                    this.usersSubject.next([...this.users]);
-                } else
-                    console.log("addUser failed; res:", res.status);
-            })
+        return new Promise<boolean>(resolve => {
+            this.dataService.addUser(user)
+                .subscribe((res: { status: string, newId: string }) => {
+                    if (res.status == "OK") {
+                        user.id = res.newId;
+                        this.users.push(user);
+                        this.usersSubject.next([...this.users]);
+                        resolve(true);
+                    } else {
+                        console.log("addUser failed; res:", res.status);
+                        resolve(false);
+                    }
+                })
+        });
     }
 
 }

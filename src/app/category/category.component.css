@@ -17,10 +17,19 @@ img {
     width: 85%;
 }
 
-main {
-    margin: 30px 0 0 40px;
+
+#categories {
+    width: 80%;
+    margin: 5px auto;
 }
 
-main p {
+#categories p {
     display: inline;
+}
+
+#categories > div {
+    margin: 5px 0;
+    font-size: large;
+    background-color: black;
+    text-align: center;
 }

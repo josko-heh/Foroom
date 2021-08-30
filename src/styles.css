@@ -1,4 +1,21 @@
 /* You can add global styles to this file and also import other style files */
+.fRight {
+    float: right;
+}
+
+a:link, a:visited, a:active {
+    color: rgb(66, 151, 221);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+main {
+    width: 50%;
+    margin: 30px 0 0 40px;
+}
 
 h2 {
     margin: 30px 0 0 40px;

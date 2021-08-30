@@ -1,4 +1,37 @@
-.comment{
-    background-color: grey;
-    margin-bottom: 20px;
+#background {
+    background-image: url("../../assets/main_background.jpg");
+    width: 1200px;
+    height: 800px;
+    background-size: cover;
+    margin: 25px auto 0 auto;
+    position: relative;
+}
+
+#background span {
+    display: block;
+    font-size: 35px;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 25px;
+    position: absolute;
+    bottom: 205px;
+}
+
+#background span:first-of-type {
+    left: 170px;
+}
+
+#background span:last-of-type {
+    right: 170px;
+    line-height: 100px;
+    height: 154px;
+}
+
+a:link, a:visited, a:active {
+    color: rgb(53, 119, 173);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

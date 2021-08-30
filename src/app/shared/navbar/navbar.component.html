@@ -1,30 +1,30 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <div collapse navbar-collapse>
-        <ul class="navbar-nav mr-auto">
-            <li class="navbar-header"><a class="navbar-brand" [routerLink]="['']">Foroom</a></li>
+    <ul class="navbar-nav">
+        <li class="navbar-header"><a class="navbar-brand" [routerLink]="['']">Foroom</a></li>
 
-            <li class="nav-item dropdown"  [ngClass]="getActiveClass('/categories.*')">
-                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Categories
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li *ngFor="let cat of categories" class="nav-item">
-                        <a class="nav-link" [routerLink]="['/categories', cat.id]">{{cat.name}}</a>
-                    </li>
-                </ul>
-            </li>
+        <li *ngIf="user && user.authLevel=='admin'" class="nav-item" [ngClass]="getActiveClass('/admin')">
+            <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        </li>
+        <li class="nav-item dropdown" [ngClass]="getActiveClass('/categories.*')">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Categories
+                <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li *ngFor="let cat of categories" class="nav-item">
+                    <a class="dropdown-link" [routerLink]="['/categories', cat.id]">{{cat.name}}</a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="nav-item" [ngClass]="getActiveClass('/profile')">
-                <a class="nav-link" [routerLink]="['/profile']">Profile</a>
-            </li>
-            <li *ngIf="user" class="nav-item">
-                <a class="nav-link" (click)="logout()">Logout</a>
-            </li>
-            <li *ngIf="!user" class="nav-item" [ngClass]="getActiveClass('/login')">
-                <a class="nav-link" [routerLink]="['/admin']">Login</a>
-            </li>
-            <li *ngIf="user && user.authLevel=='admin'" class="nav-item" [ngClass]="getActiveClass('/admin')">
-                <a class="nav-link" [routerLink]="['/admin']">Admin</a>
-            </li>
-        </ul>
-    </div>
+        <div class="verticalLine fRight"></div>
+
+        <li class="nav-item fRight" [ngClass]="getActiveClass('/profile')">
+            <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+        </li>
+        <li class="nav-item fRight" *ngIf="user">
+            <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+        <li class="nav-item fRight" *ngIf="!user" [ngClass]="getActiveClass('/login')">
+            <a class="nav-link" [routerLink]="['/admin']">Login</a>
+        </li>
+    </ul>
 </nav>

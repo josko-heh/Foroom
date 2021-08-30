@@ -8,14 +8,16 @@
     <span *ngIf="article.author">Author: {{article.author}}</span>
 </div>
 
-<router-outlet></router-outlet>
+<main>
+    <router-outlet></router-outlet>
 
-<main *ngIf="category">
-    <div *ngFor="let thread of category.threads">
-        <a [routerLink]="['threads', thread.id]">
-            <p>{{thread.title}}</p>
-            <p>{{thread.datetime | date: 'dd.MM.yyyy, h:mm a'}}</p>
-            <br>
-        </a>
+    <div id="categories" *ngIf="category">
+        <div *ngFor="let thread of category.threads">
+            <a [routerLink]="['threads', thread.id]">
+                <p>{{thread.title}}</p>
+                <p> | {{thread.datetime | date: 'dd.MM.yyyy, h:mm a'}}</p>
+                <br>
+            </a>
+        </div>
     </div>
 </main>

@@ -1,7 +1,7 @@
-#mainContainer {
+/* #mainContainer {
     width: 50%;
     margin: 30px 0 0 40px;
-}
+} */
 
 #mainContainer > div {
     margin-bottom: 40px;
@@ -15,6 +15,9 @@
     margin: auto;
 }
 
+.lineDiv:last-of-type {
+    margin-top: 20px;
+}
 
 #threadHeading {
     width: fit-content;
@@ -29,6 +32,7 @@
 .comment > span {
     display: block;
 }
+
 
 #newCommBtn {
     margin: 0 auto;

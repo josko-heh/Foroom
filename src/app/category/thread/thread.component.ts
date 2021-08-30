@@ -21,10 +21,10 @@ export class ThreadComponent implements OnInit {
     editingId: number;
     addingComm: boolean = false;
     newContent: string;
-    showFailed: boolean = false; //TODO posatvi na false na edit button
+    showFailed: boolean = false;
 
     constructor(private auth: AuthService, private categoriesService: CategoriesService,
-        private route: ActivatedRoute, private router: Router, public datepipe: DatePipe) { }
+        private route: ActivatedRoute, public datepipe: DatePipe) { }
 
     ngOnInit(): void {
         this.currentUser = this.auth.getUser();

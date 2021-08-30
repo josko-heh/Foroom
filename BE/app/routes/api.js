@@ -40,10 +40,10 @@ module.exports = function (app, express, pool, jwt, secret) {
             if (rows.length > 0)
                 res.json({ status: 'OK', users: rows });
             else
-                res.json({ status: 'NO CONTENT', users: null });
+                res.status(204).json({ status: 'NO CONTENT', users: null });
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -59,7 +59,7 @@ module.exports = function (app, express, pool, jwt, secret) {
             res.json({ status: 'OK', categories: rows });
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -93,11 +93,11 @@ module.exports = function (app, express, pool, jwt, secret) {
 
                 res.json({ status: 'OK', category: returnCategory });
             } else
-                res.json({ status: 'NO CONTENT', category: null });
+                res.status(204).json({ status: 'NO CONTENT', category: null });
 
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -121,11 +121,11 @@ module.exports = function (app, express, pool, jwt, secret) {
                     threadId: rows[0].th_id
                 });
             } else
-                res.json({ status: 'NO CONTENT', categoryId: null, threadId: null});
+                res.status(204).json({ status: 'NO CONTENT', categoryId: null, threadId: null});
 
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -172,11 +172,11 @@ module.exports = function (app, express, pool, jwt, secret) {
 
                 res.json({ status: 'OK', thread: returnThread });
             } else
-                res.json({ status: 'NO CONTENT', thread: null });
+                res.status(204).json({ status: 'NO CONTENT', thread: null });
 
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -201,7 +201,7 @@ module.exports = function (app, express, pool, jwt, secret) {
             res.json({ status: 'OK', insertId:row.insertId });
         }).catch(function(err) {
             console.error(err);
-            res.json({"code" : 100, "status" : "Error with query"});
+            res.status(100).json({"code" : 100, "status" : "Error with query"});
         });
     });
 
@@ -216,7 +216,7 @@ module.exports = function (app, express, pool, jwt, secret) {
             res.json({ status: 'OK' });
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
 
@@ -234,16 +234,9 @@ module.exports = function (app, express, pool, jwt, secret) {
             res.json({ status: 'OK' });
         }).catch(function (err) {
             console.error(err);
-            res.json({ "code": 100, "status": "Error with query" });
+            res.status(100).json({ "code": 100, "status": "Error with query" });
         });
     });
-
-    
-    /*apiRouter.get('/me', function (req, res){
-
-        res.send(req.decoded);
-
-    });*/
 
     return apiRouter;
 }

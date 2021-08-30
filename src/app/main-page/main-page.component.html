@@ -1,35 +1,4 @@
 <span>Welcome Mr/Ms {{user.name | initialPipe}}. - aka {{user.username}}</span>
 <br>
 <span>Go to <a [routerLink]="[randThreadUrl]">random thread</a></span>
-
-
-<!-- <div>
-    <div class="comment" *ngFor="let post of posts; let i = index;">
-
-        <div>
-            <p>by {{getUsername(post.idUser)}} at {{post.timestamp}}</p>
-            
-            <div  *ngIf="editingIndex != i">{{post.comment}}</div>
-            <ng-container *ngIf="editingIndex == i">
-              <textarea [(ngModel)]="post.comment"></textarea>
-            </ng-container>
-
-        <button class="btn btn-danger" *ngIf="user.id == post.idUser" (click)="deletePost(i)">Delete</button>
-        <button class="btn btn-warning" *ngIf="editingIndex != i && user.id == post.idUser" (click)="editingIndex = i">Edit</button>
-        <button class="btn btn-warning" *ngIf="editingIndex == i && user.id == post.idUser" (click)="editPost(i)">Done editing</button>
-        <br>
-
-    </div>
-</div> -->
 <br>
-
-<!-- <button class="btn btn-info" *ngIf="!addingComm" (click)="addingComm = true">Add comment</button>
-<button class="btn btn-success" *ngIf="addingComm" (click)="addingComm = false">Cancel</button>
-<div *ngIf="addingComm">
-    User: <br>
-    <input type="text" placeholder={{user.username}} disabled> 
-    <br>
-    Comment: <br>
-    <textarea name="novikom" [(ngModel)]="newPost.comment"></textarea>
-    <button class="btn btn-info" (click)="addPost()" [disabled]="newPost.comment==0">Send</button>
-</div> -->

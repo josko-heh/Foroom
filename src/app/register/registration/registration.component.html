@@ -1,3 +1,5 @@
+<h2>Registration</h2>
+
 <form [formGroup]="regForm" (submit)="onSubmit()">
     <fieldset class="form-group">
         <label>Username</label>
@@ -26,5 +28,3 @@
 <div *ngIf="isRegSuccessful!=undefined && !isRegSuccessful" class="alert alert-danger" role="alert">
     Registration failed.
 </div>
-
-<p><a [routerLink]="['../login']">Back to login form</a></p>

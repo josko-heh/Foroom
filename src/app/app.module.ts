@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { CategoryComponent } from './category/category.component';
 import { InitialPipe } from './main-page/initial.pipe';
 import { AuthenticationGuard } from './auth.guard';
+import { ThreadComponent } from './category/thread/thread.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthenticationGuard } from './auth.guard';
     MainPageComponent,
     ProfileComponent,
     CategoryComponent,
+    ThreadComponent,
     InitialPipe
   ],
   imports: [

@@ -44,31 +44,6 @@ export class MainPageComponent implements OnInit {
     }
 
 
-    /* addPost(){
-       this.newPost.idUser = this.user.id;
-       this.newPost.timestamp = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-       this.postsService.addPost({...this.newPost});
-   
-       this.newPost.timestamp = "";
-       this.newPost.comment = "";
-       this.addingComm = false;
-     }
-   
-     deletePost(i){
-       this.postsService.deletePost(this.posts[i].id);
-       this.editingIndex = null;
-     }
-   
-     editPost(i){
-       this.posts[i].timestamp = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-   
-       this.postsService.editPost(this.posts[i]);
-   
-       this.editingIndex = null;
-     }
-   */
-
-
     buildThreadUrl(categoryId: number, threadId: number): string {
         let url: string;
 

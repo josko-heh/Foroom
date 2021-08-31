@@ -1,25 +1,27 @@
 <h2>Login</h2>
 
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+<main>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-        <label for="username"><b>Username</b></label>
-        <input type="text" id="username" formControlName="username">
+        <div class="form-group">
+            <label for="username"><b>Username</b></label>
+            <input type="text" id="username" formControlName="username">
+        </div>
+
+        <div class="form-group">
+            <label for="password"><b>Password</b></label>
+            <input type="password" id="password" formControlName="password">
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="!signinForm.valid">Login</button>
+    </form>
+
+    <div *ngIf="isLoginSuccessful!=undefined && !isLoginSuccessful" class="alert alert-danger" role="alert">
+        Login failed.
     </div>
 
-    <div class="form-group">
-        <label for="password"><b>Password</b></label>
-        <input type="password" id="password" formControlName="password">
+    <div id="goRegister">
+        <span>or go ahead and </span>
+        <button class="btn btn-warning" (click)="toRegister()">Register!</button>
     </div>
-
-    <button type="submit" class="btn btn-success" [disabled]="!signinForm.valid">Login</button>
-</form>
-
-<div *ngIf="isLoginSuccessful!=undefined && !isLoginSuccessful" class="alert alert-danger" role="alert">
-    Login failed.
-</div>
-
-<div id="goRegister">
-    <span>or go ahead and </span>
-    <button class="btn btn-warning" (click)="toRegister()">Register!</button>
-</div>
+</main>

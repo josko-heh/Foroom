@@ -33,9 +33,11 @@ module.exports = function (app, express, pool, jwt, secret) {
             return p.getConnection()
         }).then(function (connection) {
             con = connection;
-            return con.query('SELECT * FROM users')
+            return con.query('SELECT id, username, name, email, auth_level FROM users;');
         }).then(rows => {
             con.release();
+
+            console.log(rows[0]);
 
             if (rows.length > 0)
                 res.json({ status: 'OK', users: rows });
@@ -188,8 +190,6 @@ module.exports = function (app, express, pool, jwt, secret) {
             user_id: req.body.user.id,
             thread_id: req.params.id
         }
-
-        console.log(comm);
 
         pool.then(function(p) {
             return p.getConnection()

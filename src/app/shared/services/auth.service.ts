@@ -13,7 +13,6 @@ export class AuthService {
 
     private user: User;
     private token: string;
-    //errorEmitter : Subject<string> = new Subject<string>();
     authChange: Subject<User> = new Subject<User>();
     authUrl: string = environment.API_URL + '/authenticate';
 
@@ -36,39 +35,16 @@ export class AuthService {
                         this.authChange.next(res.user);
                         resolve(true);
                     } else {
-                        //this.errorEmitter.next('Wrong credentials');
                         console.log('Something went wrong');
                         resolve(false);
                     }
                 })
         });
 
-            // return { success: false, message: 'Something went wrong' };
-        /* stara verzija
-        this.usersService.getAllUsers()
-          .subscribe(res => {
-            this.user = res.find(u => 
-              u.username == credentials.username && 
-              u.password == credentials.password
-            );
-    
-            if (this.user) {
-              localStorage.setItem('user', JSON.stringify(this.user));
-              this.authChange.next(true);
-              this.router.navigate(['']);
-            } else {
-                //this.errorEmitter.next('Wrong credentials');
-                console.log('Wrong credentials');
-            }
-          });*/
     }
 
     getUser(): User {
         return this.user;
-        /*stara verzija
-        if (!this.user) this.user = JSON.parse(localStorage.getItem('user'));
-        return {...this.user};
-        */
     }
 
     isAuthenticated() {

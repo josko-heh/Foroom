@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
         <li class="navbar-header"><a class="navbar-brand" [routerLink]="['']">Foroom</a></li>
 
         <li *ngIf="user && user.authLevel=='admin'" class="nav-item" [ngClass]="getActiveClass('/admin')">

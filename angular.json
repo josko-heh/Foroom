@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "petiLabos": {
+    "foroom": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/petiLabos",
+            "outputPath": "dist/foroom",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "petiLabos:build"
+            "browserTarget": "foroom:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "petiLabos:build:production"
+              "browserTarget": "foroom:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "petiLabos:build"
+            "browserTarget": "foroom:build"
           }
         },
         "test": {
@@ -113,15 +113,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "petiLabos:serve"
+            "devServerTarget": "foroom:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "petiLabos:serve:production"
+              "devServerTarget": "foroom:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "petiLabos"
+  "defaultProject": "foroom"
 }

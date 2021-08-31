@@ -17,12 +17,6 @@ export class CategoriesService {
     }
 
     init() {
-        /*this.dataService.getUsers()
-            .subscribe((res: User[]) => { // bilo samo res
-                this.users = res;
-                this.usersSubject.next([...this.users]);
-            })
-        */
         this.dataService.getCategories()
             .subscribe((res: { status: string, categories }) => {
                 if (res.status == "OK") {
@@ -39,14 +33,6 @@ export class CategoriesService {
                 } else
                     console.log("getCategories failed; res:", res.status);
             });
-            
-        /* iz angular-express\src5\app\admin\admin.component.ts
-        this.usersService.getUsers()
-            .subscribe((res:{status:string, users:User[]}) => {
-              if (res.status=="OK"){
-                this.users=res.users;
-              }
-            });*/
     }
 
 

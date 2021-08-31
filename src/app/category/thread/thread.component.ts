@@ -75,7 +75,7 @@ export class ThreadComponent implements OnInit {
         this.editingId = null;
     }
 
-    addComment(content: string) { //TODO provbaj samo broj dodat
+    addComment(content: string) {
         this.showFailed = false;
         this.addingComm = true;
 

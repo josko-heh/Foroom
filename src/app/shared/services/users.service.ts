@@ -17,12 +17,6 @@ export class UsersService {
     }
 
     init() {
-        /*this.dataService.getUsers()
-            .subscribe((res: User[]) => { // bilo samo res
-                this.users = res;
-                this.usersSubject.next([...this.users]);
-            })
-        */
         this.dataService.getUsers()
             .subscribe((res: { status: string, users: User[] }) => {
                 if (res.status == "OK") {
@@ -31,14 +25,6 @@ export class UsersService {
                 } else
                     console.log("getUsers failed; res:", res.status);
             })
-
-        /* iz angular-express\src5\app\admin\admin.component.ts
-        this.usersService.getUsers()
-            .subscribe((res:{status:string, users:User[]}) => {
-              if (res.status=="OK"){
-                this.users=res.users;
-              }
-            });*/
     }
 
 
@@ -47,23 +33,6 @@ export class UsersService {
     }
 
     addUser(user: User) {
-        /*return this.dataService.addUser(user)
-          .subscribe((res:{status:string, newUser:User}) => {
-              if (res.status=="OK"){
-                /* umjesto toga samo u res-u posalji cijelog usera is db
-                let newUser: User = {
-                  id : insertedId;
-                  name: user;
-                  password: string;
-                  username: string;
-                  email: string;
-                };*/
-        /*
-              this.users.push(res.newUser);
-              this.usersSubject.next([...this.users]);
-            }
-        })
-        */
         return new Promise<boolean>(resolve => {
             this.dataService.addUser(user)
                 .subscribe((res: { status: string, newId: string }) => {
